@@ -30,7 +30,7 @@ function waitForPageLoad(page, targetSelector) {
 }
 
 async function getRestaurantUrls(url, fileName) {
-  const targetSelector = "h3.sc-1sv4741-0.sc-jTNJqp.gTBYgB";
+  const targetSelector = "h3.sc-1sv4741-0.sc-fAfrNB.jqxTcv";
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
@@ -42,8 +42,10 @@ async function getRestaurantUrls(url, fileName) {
   // Continue with other actions or scraping logic here
   const headlines = await page.evaluate(() => {
     // Example: Extracting headlines from a news website
-    const brandElements = document.querySelectorAll("h4"); //for brand name
-    const urlElement = document.querySelectorAll("a.sc-hSmEHG.htzHpa");
+    const brandElements = document.querySelectorAll(
+      "h4.sc-1hp8d8a-0.sc-cgThhu.dFwWJC"
+    ); //for brand name
+    const urlElement = document.querySelectorAll("a.sc-bvCTgw.dIvKTC");
 
     const urlArray = Array.from(urlElement).map((element) =>
       element ? element.getAttribute("href") : null
@@ -88,9 +90,9 @@ async function getRestaurantUrls(url, fileName) {
 // const url =
 //   "https://www.zomato.com/ncr/delivery-in-vasant-kunj?dishv2_id=9055&rating_range=4.0-5.0";
 
-// // EOK
-const url =
-  "https://www.zomato.com/ncr/delivery-in-east-of-kailash?dishv2_id=9055&rating_range=4.0-5.0";
+// // // EOK
+// const url =
+//   "https://www.zomato.com/ncr/delivery-in-east-of-kailash?dishv2_id=9055&rating_range=4.0-5.0";
 
 // // Bakery
 // // EOK
@@ -106,6 +108,11 @@ const url =
 // test url
 // const url =
 //   "https://www.zomato.com/ncr/delivery?zomato_place_v2=47690&dishv2_id=42212";
+
+// Pastas
+// // SL1
+const url =
+  "https://www.zomato.com/ncr/delivery?zomato_place_v2=47690&dishv2_id=51177&rating_range=4.0-5.0";
 
 // Specify the CSS selector for the target element at the end of the page
 
@@ -351,8 +358,8 @@ function jsonToCsv(fileName) {
         element?.discounts[i + 1] && discountFlag
           ? element?.discounts[i + 1]
           : ""
-      },${dish.dish},${dish.price},${dish.votes},${dish.vegNon},${
-        dish.noOfRatings || 0
+      },${dish.dish},${dish.price},${dish.votes || "0 votes"},${dish.vegNon},${
+        dish.rating || "0"
       },${replaceCommas(dish.description)}\n`;
     });
   });
@@ -374,9 +381,9 @@ function replaceCommas(str) {
 // jsonToCsv("sl1-burgers-data");
 // ------------------------------
 // ------------------------------
-getRestaurantUrls(url, "eok-burgers");
+// getRestaurantUrls(url, "sl1-pastas");
 
-// getDataForEachRestaurant("vk-bakery");
+// getDataForEachRestaurant("sl1-pastas");
 
-// jsonToCsv("vk-bakery");
+jsonToCsv("sl1-pastas");
 // ------------------------------
