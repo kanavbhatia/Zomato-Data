@@ -30,7 +30,7 @@ function waitForPageLoad(page, targetSelector) {
 }
 
 async function getRestaurantUrls(url, fileName) {
-  const targetSelector = "h3.sc-1sv4741-0.sc-fAfrNB.jqxTcv";
+  const targetSelector = "h3.sc-1sv4741-0.sc-fYAFcb.Sylg";
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
@@ -43,9 +43,9 @@ async function getRestaurantUrls(url, fileName) {
   const headlines = await page.evaluate(() => {
     // Example: Extracting headlines from a news website
     const brandElements = document.querySelectorAll(
-      "h4.sc-1hp8d8a-0.sc-cgThhu.dFwWJC"
+      "h4.sc-1hp8d8a-0.sc-jFpLkX.hQWwrs"
     ); //for brand name
-    const urlElement = document.querySelectorAll("a.sc-bvCTgw.dIvKTC");
+    const urlElement = document.querySelectorAll("a.sc-kIWQTW.iNuXAp");
 
     const urlArray = Array.from(urlElement).map((element) =>
       element ? element.getAttribute("href") : null
@@ -111,8 +111,13 @@ async function getRestaurantUrls(url, fileName) {
 
 // Pastas
 // // SL1
+// const url =
+//   "https://www.zomato.com/ncr/delivery?zomato_place_v2=47690&dishv2_id=51177&rating_range=4.0-5.0";
+
+// Sanwiches
+// // SL1
 const url =
-  "https://www.zomato.com/ncr/delivery?zomato_place_v2=47690&dishv2_id=51177&rating_range=4.0-5.0";
+  "https://www.zomato.com/ncr/delivery-in-sushant-lok?dishv2_id=64088&rating_range=4.0-5.0";
 
 // Specify the CSS selector for the target element at the end of the page
 
@@ -374,6 +379,9 @@ function replaceCommas(str) {
   return str ? str.replace(/,/g, "") : "";
 }
 // ------------------------------
+// getRestaurantUrls(url, "sl1-sandwiches");
+getDataForEachRestaurant("sl1-sandwiches");
+// ------------------------------
 // getRestaurantUrls(url, "sl1-burgers");
 
 // getDataForEachRestaurant("sl1-burgers");
@@ -385,5 +393,5 @@ function replaceCommas(str) {
 
 // getDataForEachRestaurant("sl1-pastas");
 
-jsonToCsv("sl1-pastas");
+// jsonToCsv("sl1-pastas");
 // ------------------------------
